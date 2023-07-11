@@ -1,28 +1,50 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
+using Microsoft.UI.Xaml;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
+//https://go.microsoft.com/fwlink/?LinkId=234236 上介绍了“用户控件”项模板
 
-namespace HyPlayer.Controls
+namespace HyPlayer.Controls;
+
+public sealed partial class SelectableTextBox : UserControl
 {
-    public sealed partial class SelectableTextBox : UserControl
+    public static readonly DependencyProperty SelectableProperty = DependencyProperty.Register(
+        nameof(Selectable), typeof(bool), typeof(SelectableTextBox), new PropertyMetadata(true));
+
+    public static readonly DependencyProperty TextProperty = DependencyProperty.Register(
+        nameof(Text), typeof(string), typeof(SelectableTextBox), new PropertyMetadata(default(string)));
+
+    public static readonly DependencyProperty MaxLinesProperty = DependencyProperty.Register(
+        nameof(MaxLines), typeof(int), typeof(SelectableTextBox), new PropertyMetadata(default(int)));
+
+    public static readonly DependencyProperty TextWrappingProperty = DependencyProperty.Register(
+        nameof(TextWrapping), typeof(TextWrapping), typeof(SelectableTextBox), new PropertyMetadata(default(TextWrapping)));
+
+    public SelectableTextBox()
     {
-        public SelectableTextBox()
-        {
-            this.InitializeComponent();
-        }
+        InitializeComponent();
+    }
+
+    public bool Selectable
+    {
+        get => (bool)GetValue(SelectableProperty);
+        set => SetValue(SelectableProperty, value);
+    }
+
+    public string Text
+    {
+        get => (string)GetValue(TextProperty);
+        set => SetValue(TextProperty, value);
+    }
+
+    public int MaxLines
+    {
+        get => (int)GetValue(MaxLinesProperty);
+        set => SetValue(MaxLinesProperty, value);
+    }
+
+    public TextWrapping TextWrapping
+    {
+        get => (TextWrapping)GetValue(TextWrappingProperty);
+        set => SetValue(TextWrappingProperty, value);
     }
 }

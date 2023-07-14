@@ -8,6 +8,7 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="ExpandableTextBox.xaml" />
+    <None Remove="ScrollingTextBlock.xaml" />
     <None Remove="SelectableTextBox.xaml" />
   </ItemGroup>
 
@@ -27,5 +28,13 @@
     <Page Update="ExpandableTextBox.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <CustomAdditionalCompileInputs Remove="ScrollingTextBlock.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Remove="ScrollingTextBlock.xaml" />
   </ItemGroup>
 </Project>

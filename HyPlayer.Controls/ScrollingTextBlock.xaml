@@ -9,6 +9,19 @@
     mc:Ignorable="d">
 
     <Grid>
-
+        <ScrollViewer
+            HorizontalScrollBarVisibility="Hidden"
+            HorizontalScrollMode="Enabled"
+            VerticalScrollBarVisibility="Disabled"
+            VerticalScrollMode="Disabled"
+            x:FieldModifier="public"
+            x:Name="scrolviewer">
+            <TextBlock
+                FontSize="{x:Bind FontSize, Mode=OneWay}"
+                FontWeight="{x:Bind FontWeight}"
+                Padding="0,0,100,0"
+                x:FieldModifier="public"
+                x:Name="Tb" />
+        </ScrollViewer>
     </Grid>
 </UserControl>

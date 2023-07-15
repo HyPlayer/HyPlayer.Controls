@@ -1,28 +1,40 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
+namespace HyPlayer.Controls;
 
-namespace HyPlayer.Controls
+public sealed partial class ScrollingTextBlock : UserControl
 {
-    public sealed partial class ScrollingTextBlock : UserControl
+    // Using a DependencyProperty as the backing store for Horizontalofset.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty HorizontalofsetProperty =
+        DependencyProperty.Register("Horizontalofset", typeof(double), typeof(ScrollingTextBlock),
+            new PropertyMetadata(0, PropertyChangedCallback));
+
+
+    public ScrollingTextBlock()
     {
-        public ScrollingTextBlock()
+        InitializeComponent();
+    }
+
+    public string Text
+    {
+        set => Tb.Text = value;
+    }
+
+    public double Horizontalofset
+    {
+        get => (double)GetValue(HorizontalofsetProperty);
+        set => SetValue(HorizontalofsetProperty, value);
+    }
+
+    public static void PropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        var distance = (d as ScrollingTextBlock).scrolviewer.ScrollableWidth;
+        if (!(e.NewValue is 0) || distance > (double)e.NewValue)
         {
-            this.InitializeComponent();
+            var ret = (d as ScrollingTextBlock).scrolviewer.ChangeView((double)e.NewValue,
+                (d as ScrollingTextBlock).scrolviewer.VerticalOffset,
+                (d as ScrollingTextBlock).scrolviewer.ZoomFactor);
         }
     }
 }
